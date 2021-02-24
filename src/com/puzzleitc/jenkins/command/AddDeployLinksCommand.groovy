@@ -20,7 +20,7 @@ class AddDeployLinksCommand {
         ctx.echo("deployJob: " + deployJob)
         def deploymentJob = Jenkins.instance.getItemByFullName(deployJob)
         if (deploymentJob == null) {
-          error(ctx.getClass().getName() + ": can't find job '${deploymentJob}'!" )
+          error(ctx.getClass().getName() + ": Cannot find job ${deploymentJob}!" )
         }
         ctx.addHtmlBadge html:"<a href=\"/${deploymentJob.getUrl()}parambuild?delay=0sec&built_name=${ctx.getEnv('JOB_NAME')}&built_number=${ctx.getEnv('BUILD_NUMBER')}\">Deploy</a> "
     }
