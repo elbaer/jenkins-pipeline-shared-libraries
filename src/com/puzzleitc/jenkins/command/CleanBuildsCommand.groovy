@@ -16,7 +16,7 @@ class CleanBuildsCommand {
 
     void execute() {
         this.maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10) as Integer
-        this.job = ctx.stepParams.getRequired("job")
+        job = ctx.stepParams.getRequired("job")
         Jenkins.instance.getItemByFullName(this.job)
                 .getBuilds()
                 .findAll { it.isKeepLog() }
