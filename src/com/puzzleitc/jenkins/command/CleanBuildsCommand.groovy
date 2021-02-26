@@ -12,9 +12,27 @@ class CleanBuildsCommand {
     }
 
     void execute() {
-        def job = ctx.stepParams.getOptional("job")
+        def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10)
+        def job = ctx.stepParams.getRequired("job")
+        def environmentBuildCount = [:]
         try {
-            ctx.info("Keeping build: " + getSuccessfulBuilds(job))
+            def successfulJobRuns = getSuccessfulBuilds(job)
+            successfulJobRuns.each { build ->
+                def deployedEnvironment = []
+                build.getActions(BadgeAction.class).each {
+                    deployedEnvironment << it.id
+                    environmentBuildCount[it.id] = environmentBuildCount.get(it.id, 0) + 1
+                }
+
+                // each Build that should be kept will be stored in keepBuild map
+                def keepBuild = []
+                deployedEnvironment.each {
+                    if (environmentBuildCount[it] <= maxNumberToKeepBuilds) {
+                        keepBuild << it
+                    }
+                }
+            }
+
         } catch (Exception e) {
             ctx.fail("Cannot find job: " + job)
         }
