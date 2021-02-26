@@ -12,7 +12,7 @@ class CleanBuildsCommand {
 
     void execute() {
         def job = ctx.stepParams.getRequired("job")
-        def getAllSuccessfulBuilds = Jenkins.instance.getItemByFullName(job)
+        def getAllSuccessfulBuilds = "Jenkins.instance.getItemByFullName(job)"
 
         ctx.info("Keeping build ${getAllSuccessfulBuilds}")
     }
