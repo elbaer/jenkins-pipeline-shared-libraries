@@ -17,7 +17,7 @@ class CleanBuildsCommand {
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
         def successfulJobRuns = Jenkins.instance.getItemByFullName(job).getBuilds().findAll { it.isKeepLog() }
-        def log = ""
+        String log = ""
         successfulJobRuns.each { build ->
             def deployedEnvironment = []
             build.getActions(BadgeAction.class).each {
