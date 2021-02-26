@@ -50,7 +50,7 @@ class CleanBuildsCommand {
     getSuccessfulJobRuns(String jobname) {
         def test = Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
         test.each { build ->
-            ctx.echo("successful Job Run: " + build)
+            ctx.echo(build)
         }
         return test
     }
