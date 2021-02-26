@@ -43,11 +43,7 @@ class CleanBuildsCommand {
     }
 
     void printThis(String argument) {
-//        this.ctx.info(argument)
-        println(argument)
-    }
-
-    Object getSuccessfulJobRuns(String jobname) {
-        return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
+        this.ctx.info(argument)
+//        println(argument)
     }
 }
