@@ -6,7 +6,7 @@ import com.puzzleitc.jenkins.command.context.PipelineContext
 class CleanBuildsCommand {
     private final PipelineContext ctx
     private int maxNumberToKeepBuilds
-    private String job
+    private Object job
     private List environmentBuildCount
     private List deployedEnvironment
 
