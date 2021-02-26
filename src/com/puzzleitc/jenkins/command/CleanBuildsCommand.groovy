@@ -47,8 +47,7 @@ class CleanBuildsCommand {
         println(argument)
     }
 
-    @NonCPS
-    getSuccessfulJobRuns(String jobname) {
+    Object getSuccessfulJobRuns(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
     }
 }
