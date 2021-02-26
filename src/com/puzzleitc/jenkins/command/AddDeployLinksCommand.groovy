@@ -1,7 +1,7 @@
 package com.puzzleitc.jenkins.command
 
+import jenkins.model.Jenkins
 import com.puzzleitc.jenkins.command.context.PipelineContext
-import com.puzzleitc.jenkins.command.context.StepParams
 
 class AddDeployLinksCommand {
 
@@ -13,15 +13,17 @@ class AddDeployLinksCommand {
 
     void execute() {
         ctx.info('-- AddDeployLinks --')
-        def deployJob = ctx.stepParams.getOptional('deployJob')
-        if (deployJob == null) {
-          error(ctx.getClass().getName() + ': No deploymentJob found. Must be specified!')
+        String Jobname = ctx.stepParams.getOptional('deployJob').toString()
+        if (Jobname == null) {
+            error(ctx.getClass().getName() + ': No job name passed. deployJob variable must be specified!')
+        } else {
+            ctx.echo("deployJob: " + Jobname)
+            try {
+                def deploymentJob = Jenkins.getItemByFullName(Jobname)
+                ctx.addHtmlBadge html: "<a href=\"/${deploymentJob.getUrl()}parambuild?delay=0sec&built_name=${ctx.getEnv('JOB_NAME')}&built_number=${ctx.getEnv('BUILD_NUMBER')}\">Deploy</a> "
+            } catch (Exception e) {
+                error(ctx.getClass().getName() + ": Cannot find job ${deployJob}!")
+            }
         }
-        ctx.echo("deployJob: " + deployJob)
-        def deploymentJob = Jenkins.instance.getItemByFullName(deployJob)
-        if (deploymentJob == null) {
-          error(ctx.getClass().getName() + ": Cannot find job ${deploymentJob}!" )
-        }
-        ctx.addHtmlBadge html:"<a href=\"/${deploymentJob.getUrl()}parambuild?delay=0sec&built_name=${ctx.getEnv('JOB_NAME')}&built_number=${ctx.getEnv('BUILD_NUMBER')}\">Deploy</a> "
     }
 }
