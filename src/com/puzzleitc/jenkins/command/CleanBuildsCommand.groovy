@@ -32,14 +32,12 @@ class CleanBuildsCommand {
                         keepBuild << it
                     }
                 }
-//                keepBuild = checkBuild(keepBuild, build)
 
                 // print out reason of/not keeping the build
                 if (keepBuild) {
                     ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
                 } else {
                     ctx.info("Deleting build ${build}")
-                    deleteBuild(build)
                 }
            }
 
@@ -51,17 +49,5 @@ class CleanBuildsCommand {
     @NonCPS
     Object getSuccessfulJobRuns(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
-    }
-
-    @NonCPS
-    List checkBuild(List keepBuild, Object build) {
-        // print out reason of/not keeping the build
-        if (keepBuild) {
-            ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
-        } else {
-            ctx.info("Deleting build ${build}")
-            build.delete()
-        }
-        return keepBuild
     }
 }
