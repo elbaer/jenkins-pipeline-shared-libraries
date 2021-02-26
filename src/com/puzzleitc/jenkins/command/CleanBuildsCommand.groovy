@@ -17,6 +17,7 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         def successfulJobRuns = getSuccessfulJobRuns(job)
         successfulJobRuns.each { build ->
+            this.ctx.info("hallo welt")
 //                def deployedEnvironment = []
 //                build.getActions(BadgeAction.class).each {
 //                    deployedEnvironment << it.id
@@ -37,7 +38,7 @@ class CleanBuildsCommand {
 //                } else {
 //                    ctx.info("Deleting build ${build}")
 //                }
-           }
+        }
     }
 
     @NonCPS
