@@ -52,8 +52,8 @@ class CleanBuildsCommand {
     }
 
     void info(String message) {
-        script.ansiColor('xterm') {
-            script.echo("\033[0;34m${message}\033[0m")
+        ctx.ansiColor('xterm') {
+            ctx.echo("\033[0;34m${message}\033[0m")
         }
     }
 }
