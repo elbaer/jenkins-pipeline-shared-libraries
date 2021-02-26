@@ -36,17 +36,22 @@ class CleanBuildsCommand {
                     ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
                 } else {
                     ctx.info("Deleting build ${build}")
-                    build.delete()
+                    deleteBuild(build)
                 }
             }
 
         } catch (Exception e) {
-            ctx.fail("Cannot find job: " + job)
+            ctx.fail(e.printStackTrace())
         }
     }
 
     @NonCPS
     Object getSuccessfulBuilds(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
+    }
+
+    @NonCPS
+    void deleteBuild(Object build) {
+        build.delete()
     }
 }
