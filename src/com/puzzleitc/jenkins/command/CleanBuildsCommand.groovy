@@ -17,7 +17,7 @@ class CleanBuildsCommand {
 
             ctx.info("Keeping build ${getAllSuccessfulBuilds}")
         } catch (Exception e) {
-            error(ctx.getClass().getName() + ": Cannot find job ${job}!")
+            error(ctx.getClass().getName() + ": Cannot find job!")
         }
     }
 }
