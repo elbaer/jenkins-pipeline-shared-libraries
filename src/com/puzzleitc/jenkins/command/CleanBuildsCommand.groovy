@@ -15,9 +15,8 @@ class CleanBuildsCommand {
         def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10)
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
-             def successfulJobRuns = getSuccessfulJobRuns(job)
-            ctx.info(successfulJobRuns)
-            successfulJobRuns.each { build ->
+        def successfulJobRuns = getSuccessfulJobRuns(job)
+        successfulJobRuns.each { build ->
 //                def deployedEnvironment = []
 //                build.getActions(BadgeAction.class).each {
 //                    deployedEnvironment << it.id
