@@ -17,7 +17,7 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         try {
             def successfulJobRuns = getSuccessfulJobRuns(job)
-            print("successfulJobRuns: " + successfulJobRuns)
+            script.echo("successfulJobRuns: " + successfulJobRuns)
             successfulJobRuns.each { build ->
                 print("successful Job Run: " + build)
 //                def deployedEnvironment = []
