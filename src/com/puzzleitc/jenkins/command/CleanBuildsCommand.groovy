@@ -45,9 +45,9 @@ class CleanBuildsCommand {
             ctx.fail(e.printStackTrace())
         }
     }
-    @NonCPS
+
     printOutput(Object obj) {
-        ctx.info("Info: " + obj)
+        ctx.warn("Info: " + obj)
     }
 
     @NonCPS
