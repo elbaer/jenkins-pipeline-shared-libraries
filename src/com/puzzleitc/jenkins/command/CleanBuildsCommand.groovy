@@ -2,12 +2,12 @@ package com.puzzleitc.jenkins.command
 
 import com.cloudbees.groovy.cps.NonCPS
 import com.jenkinsci.plugins.badge.action.BadgeAction
-import com.puzzleitc.jenkins.command.context.JenkinsPipelineContext
+import com.puzzleitc.jenkins.command.context.PipelineContext
 
 class CleanBuildsCommand {
-    private final JenkinsPipelineContext ctx
+    private final PipelineContext ctx
 
-    CleanBuildsCommand(JenkinsPipelineContext ctx) {
+    CleanBuildsCommand(PipelineContext ctx) {
         this.ctx = ctx
     }
 
@@ -43,15 +43,12 @@ class CleanBuildsCommand {
     }
 
     void printThis(String argument) {
-        info(argument)
+//        this.ctx.info(argument)
+        println(argument)
     }
 
     @NonCPS
     getSuccessfulJobRuns(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
-    }
-
-    void info(String message) {
-        this.ctx.info(message)
     }
 }
