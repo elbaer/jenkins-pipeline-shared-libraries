@@ -43,7 +43,7 @@ class CleanBuildsCommand {
            }
 
         } catch (Exception e) {
-            error(e.printStackTrace())
+            print(e.printStackTrace())
         }
     }
 
