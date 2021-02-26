@@ -2,12 +2,12 @@ package com.puzzleitc.jenkins.command
 
 import com.cloudbees.groovy.cps.NonCPS
 import com.jenkinsci.plugins.badge.action.BadgeAction
-import com.puzzleitc.jenkins.command.context.PipelineContext
+import com.puzzleitc.jenkins.command.context.JenkinsPipelineContext
 
 class CleanBuildsCommand {
-    private final PipelineContext ctx
+    private final JenkinsPipelineContext ctx
 
-    CleanBuildsCommand(PipelineContext ctx) {
+    CleanBuildsCommand(JenkinsPipelineContext ctx) {
         this.ctx = ctx
     }
 
@@ -17,7 +17,7 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         try {
             def successfulJobRuns = getSuccessfulJobRuns(job)
-            printOutput(successfulJobRuns)
+            ctx.info(successfulJobRuns)
             successfulJobRuns.each { build ->
 //                def deployedEnvironment = []
 //                build.getActions(BadgeAction.class).each {
@@ -44,10 +44,6 @@ class CleanBuildsCommand {
         } catch (Exception e) {
             ctx.fail(e.printStackTrace())
         }
-    }
-
-    void printOutput(Object obj) {
-        ctx.warn("Info: " + obj)
     }
 
     @NonCPS
