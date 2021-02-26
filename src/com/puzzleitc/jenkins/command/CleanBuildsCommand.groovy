@@ -5,22 +5,21 @@ import com.puzzleitc.jenkins.command.context.PipelineContext
 
 class CleanBuildsCommand {
     private final PipelineContext ctx
-    private int maxNumberToKeepBuilds
-    private Object job
-    private List environmentBuildCount
-    private List deployedEnvironment
 
     CleanBuildsCommand(PipelineContext ctx) {
         this.ctx = ctx
     }
 
     void execute() {
-        this.maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10) as Integer
-        job = ctx.stepParams.getRequired("job")
-        Jenkins.instance.getItemByFullName(this.job)
+        def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10) as Integer
+        def environmentBuildCount = [:]
+        def job = ctx.stepParams.getRequired("job")
+        ctx.info(job)
+        Jenkins.instance.getItemByFullName(job)
                 .getBuilds()
                 .findAll { it.isKeepLog() }
                 .each { build ->
+                    def deployedEnvironment = []
                     build.getActions(BadgeAction.class).each {
                         deployedEnvironment << it.id
                         environmentBuildCount[it.id] = environmentBuildCount.get(it.id, 0) + 1
