@@ -14,7 +14,7 @@ class AddDeployLinksCommand {
     void execute() {
         ctx.info('-- AddDeployLinks --')
         String Jobname = ctx.stepParams.getOptional('deployJob').toString()
-        if (Jobname == null) {
+        if (Jobname == "null") {
             error(ctx.getClass().getName() + ': No job name passed. deployJob variable must be specified!')
         } else {
             ctx.echo("deployJob: " + Jobname)
@@ -22,7 +22,7 @@ class AddDeployLinksCommand {
                 def deploymentJob = Jenkins.getItemByFullName(Jobname)
                 ctx.addHtmlBadge html: "<a href=\"/${deploymentJob.getUrl()}parambuild?delay=0sec&built_name=${ctx.getEnv('JOB_NAME')}&built_number=${ctx.getEnv('BUILD_NUMBER')}\">Deploy</a> "
             } catch (Exception e) {
-                error(ctx.getClass().getName() + ": Cannot find job ${deployJob}!")
+                error(ctx.getClass().getName() + ": Cannot find job ${Jobname}!")
             }
         }
     }
