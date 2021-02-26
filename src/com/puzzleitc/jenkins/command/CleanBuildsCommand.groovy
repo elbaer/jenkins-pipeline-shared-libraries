@@ -11,7 +11,7 @@ class CleanBuildsCommand {
     }
 
     void execute() {
-        def job = ctx.stepParams.getRequired("job")
+        def job = ctx.stepParams.getOptional("job")
         try {
             def getAllSuccessfulBuilds = Jenkins.instance.getItemByFullName(job)
 
