@@ -1,6 +1,5 @@
 package com.puzzleitc.jenkins.command
 
-import jenkins.model.Jenkins
 import com.puzzleitc.jenkins.command.context.PipelineContext
 
 class AddDeployLinksCommand {
@@ -19,7 +18,7 @@ class AddDeployLinksCommand {
         } else {
             ctx.echo("deployJob: " + Jobname)
             try {
-                def deploymentJob = Jenkins.getItemByFullName(Jobname)
+                def deploymentJob = Jenkins.instance.getItemByFullName(Jobname)
                 ctx.addHtmlBadge html: "<a href=\"/${deploymentJob.getUrl()}parambuild?delay=0sec&built_name=${ctx.getEnv('JOB_NAME')}&built_number=${ctx.getEnv('BUILD_NUMBER')}\">Deploy</a> "
             } catch (Exception e) {
                 error(ctx.getClass().getName() + ": Cannot find job ${Jobname}!")
