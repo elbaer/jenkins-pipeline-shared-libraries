@@ -52,8 +52,6 @@ class CleanBuildsCommand {
     }
 
     void info(String message) {
-        ctx.ansiColor('xterm') {
-            ctx.echo("\033[0;34m${message}\033[0m")
-        }
+        this.ctx.info(message)
     }
 }
