@@ -53,7 +53,7 @@ class CleanBuildsCommand {
     }
 
     @NonCPS
-    List checkBuild(keepBuild, build) {
+    List checkBuild(List keepBuild, Object build) {
         // print out reason of/not keeping the build
         if (keepBuild) {
             ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
@@ -61,5 +61,6 @@ class CleanBuildsCommand {
             ctx.info("Deleting build ${build}")
             build.delete()
         }
+        return keepBuild
     }
 }
