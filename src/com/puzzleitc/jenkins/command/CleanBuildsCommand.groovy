@@ -31,7 +31,7 @@ class CleanBuildsCommand {
                         keepBuild << it
                     }
                 }
-                keepBuild = checkBuild(keepBuild, build)
+//                keepBuild = checkBuild(keepBuild, build)
 
                 // print out reason of/not keeping the build
 //                if (keepBuild) {
