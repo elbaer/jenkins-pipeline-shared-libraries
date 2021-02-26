@@ -36,6 +36,7 @@ class CleanBuildsCommand {
             if (keepBuild) {
                 keepBuild.join(' ')
                 printThis("Keeping build ${build} because of the following promotions: ${keepBuild}")
+                ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild}")
             } else {
                 printThis("Deleting build ${build}")
                 build.delete()
