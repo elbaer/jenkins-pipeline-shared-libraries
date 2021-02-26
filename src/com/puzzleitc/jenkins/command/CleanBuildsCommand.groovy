@@ -41,9 +41,8 @@ class CleanBuildsCommand {
         }
     }
 
-    @NonCPS
     printThis(String argument) {
-        this.ctx.info(argument)
+        println(argument)
     }
 
     @NonCPS
