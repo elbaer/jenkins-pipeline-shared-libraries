@@ -12,8 +12,12 @@ class CleanBuildsCommand {
 
     void execute() {
         def job = ctx.stepParams.getRequired("job")
-        def getAllSuccessfulBuilds = "Jenkins.instance.getItemByFullName(job)"
+        try {
+            def getAllSuccessfulBuilds = Jenkins.instance.getItemByFullName(job)
 
-        ctx.info("Keeping build ${getAllSuccessfulBuilds}")
+            ctx.info("Keeping build ${getAllSuccessfulBuilds}")
+        } catch (Exception e) {
+            error(ctx.getClass().getName() + ": Cannot find job ${job}!")
+        }
     }
 }
