@@ -31,6 +31,14 @@ class CleanBuildsCommand {
                         keepBuild << it
                     }
                 }
+                if (keepBuild) {
+                    keepBuild.join(' ')
+                    echo "behalten: ${build}"
+                } else {
+                    echo "löschen: ${build}"
+                    build.delete()
+                }
+
 //                keepBuild = checkBuild(keepBuild, build)
 
                 // print out reason of/not keeping the build
