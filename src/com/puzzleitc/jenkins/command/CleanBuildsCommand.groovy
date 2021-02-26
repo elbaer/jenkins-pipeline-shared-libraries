@@ -12,6 +12,7 @@ class CleanBuildsCommand {
     }
 
     void execute() {
+        ctx.info('-- CleanBuilds --')
         def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 9)
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
@@ -43,7 +44,7 @@ class CleanBuildsCommand {
     }
 
     void printThis(String argument) {
-        this.ctx.info(argument)
-//        println(argument)
+//        ctx.info(argument)
+        println(argument)
     }
 }
