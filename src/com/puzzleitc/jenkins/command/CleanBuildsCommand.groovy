@@ -35,9 +35,10 @@ class CleanBuildsCommand {
             // print out reason of/not keeping the build
             if (keepBuild) {
                 keepBuild.join(' ')
+                printThis("keepBuild ${build}: " + keepBuild)
             }
 
-            printThis("keepBuild: " + keepBuild)
+
         }
     }
 
