@@ -12,7 +12,7 @@ class CleanBuildsCommand {
     }
 
     void execute() {
-        def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10)
+        def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 9)
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
         def successfulJobRuns = getSuccessfulJobRuns(job)
@@ -36,9 +36,10 @@ class CleanBuildsCommand {
             if (keepBuild) {
                 keepBuild.join(' ')
                 printThis("Keeping build ${build} because of the following promotions: ${keepBuild}")
+            } else {
+                printThis("Deleting build ${build}")
+                build.delete()
             }
-
-
         }
     }
 
