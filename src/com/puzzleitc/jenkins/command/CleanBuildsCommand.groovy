@@ -5,8 +5,8 @@ import com.puzzleitc.jenkins.command.context.PipelineContext
 
 class CleanBuildsCommand {
     private final PipelineContext ctx
-    private int maxNumberToKeepBuilds = 10
-    private String job = ""
+    private int maxNumberToKeepBuilds
+    private String job
     private List environmentBuildCount
     private List deployedEnvironment
 
@@ -15,7 +15,7 @@ class CleanBuildsCommand {
     }
 
     void execute() {
-        this.maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds') as Integer
+        this.maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10) as Integer
         this.job = ctx.stepParams.getRequired("job")
         Jenkins.instance.getItemByFullName(this.job)
                 .getBuilds()
