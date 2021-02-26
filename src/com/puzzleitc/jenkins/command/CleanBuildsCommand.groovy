@@ -46,7 +46,7 @@ class CleanBuildsCommand {
         }
     }
 
-    printOutput(Object obj) {
+    void printOutput(Object obj) {
         ctx.warn("Info: " + obj)
     }
 
