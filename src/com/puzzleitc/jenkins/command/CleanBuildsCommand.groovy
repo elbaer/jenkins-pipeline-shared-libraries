@@ -43,7 +43,7 @@ class CleanBuildsCommand {
                         }
                     }
         } catch (Exception e) {
-            ctx.fail("Exception: " + e.printStackTrace())
+            ctx.fail("Exception: "+ e.getClass() + "\n" + e.getCause())
         }
     }
 //    void execute() {
