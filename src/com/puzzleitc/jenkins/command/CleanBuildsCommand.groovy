@@ -17,7 +17,6 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         def successfulJobRuns = getSuccessfulJobRuns(job)
         successfulJobRuns.each { build ->
-            printThis("Job: " + build)
             def deployedEnvironment = []
             build.getActions(BadgeAction.class).each {
                 deployedEnvironment << it.id
