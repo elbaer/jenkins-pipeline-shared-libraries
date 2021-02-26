@@ -22,6 +22,6 @@ class CleanBuildsCommand {
 
     @NonCPS
     Object getSuccessfulBuilds(String jobname) {
-        return Jenkins.instance.getItemByFullName(jobname)
+        return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
     }
 }
