@@ -17,6 +17,7 @@ class CleanBuildsCommand {
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
         def successfulJobRuns = Jenkins.instance.getItemByFullName(job).getBuilds().findAll { it.isKeepLog() }
+        def log = ""
         successfulJobRuns.each { build ->
             def deployedEnvironment = []
             build.getActions(BadgeAction.class).each {
@@ -35,17 +36,14 @@ class CleanBuildsCommand {
             // print out reason of/not keeping the build
             if (keepBuild) {
                 keepBuild.join(' ')
-                printThis("Keeping build ${build} because of the following promotions: ${keepBuild}")
-                ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild}")
+                println("Keeping build ${build} because of the following promotions: ${keepBuild}")
+                log = log + "<br>" + "Keeping build ${build} because of the following promotions: ${keepBuild}"
             } else {
-                printThis("Deleting build ${build}")
+                println("Deleting build ${build}")
+                log = log + "<br>" + "Deleting build ${build}"
                 build.delete()
             }
         }
-    }
-
-    void printThis(String argument) {
-//        ctx.info(argument)
-        println(argument)
+        ctx.info(log)
     }
 }
