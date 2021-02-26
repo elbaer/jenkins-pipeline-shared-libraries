@@ -15,8 +15,7 @@ class CleanBuildsCommand {
         def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10)
         def job = ctx.stepParams.getRequired("job")
         def environmentBuildCount = [:]
-        try {
-            def successfulJobRuns = getSuccessfulJobRuns(job)
+             def successfulJobRuns = getSuccessfulJobRuns(job)
             ctx.info(successfulJobRuns)
             successfulJobRuns.each { build ->
 //                def deployedEnvironment = []
@@ -40,10 +39,6 @@ class CleanBuildsCommand {
 //                    ctx.info("Deleting build ${build}")
 //                }
            }
-
-        } catch (Exception e) {
-            ctx.fail(e.printStackTrace())
-        }
     }
 
     @NonCPS
