@@ -31,6 +31,7 @@ class CleanBuildsCommand {
                         keepBuild << it
                     }
                 }
+                ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
                 // print out reason of/not keeping the build
 //                if (keepBuild) {
 //                    ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
