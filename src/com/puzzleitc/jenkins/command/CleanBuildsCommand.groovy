@@ -36,7 +36,7 @@ class CleanBuildsCommand {
                     ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
                 } else {
                     ctx.info("Deleting build ${build}")
-                    deleteBuild(build)
+//                    deleteBuild(build)
                 }
             }
 
