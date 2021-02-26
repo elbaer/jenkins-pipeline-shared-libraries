@@ -17,7 +17,7 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         try {
             def successfulJobRuns = getSuccessfulJobRuns(job)
-//            ctx.info("successfulJobRuns: " + successfulJobRuns)
+            printOutput(successfulJobRuns)
             successfulJobRuns.each { build ->
 //                def deployedEnvironment = []
 //                build.getActions(BadgeAction.class).each {
@@ -45,10 +45,13 @@ class CleanBuildsCommand {
             ctx.fail(e.printStackTrace())
         }
     }
+    @NonCPS
+    printOutput(Object obj) {
+        ctx.info("Info: " + obj)
+    }
 
     @NonCPS
     getSuccessfulJobRuns(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
-
     }
 }
