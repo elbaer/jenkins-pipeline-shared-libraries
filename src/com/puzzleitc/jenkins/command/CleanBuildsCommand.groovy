@@ -18,26 +18,6 @@ class CleanBuildsCommand {
         def successfulJobRuns = getSuccessfulJobRuns(job)
         successfulJobRuns.each { build ->
             printThis("hallo welt")
-//                def deployedEnvironment = []
-//                build.getActions(BadgeAction.class).each {
-//                    deployedEnvironment << it.id
-//                    environmentBuildCount[it.id] = environmentBuildCount.get(it.id, 0) + 1
-//                }
-//
-//                // each Build that should be kept will be stored in keepBuild map
-//                def keepBuild = []
-//                deployedEnvironment.each {
-//                    if (environmentBuildCount[it] <= maxNumberToKeepBuilds) {
-//                        keepBuild << it
-//                    }
-//                }
-//
-//                // print out reason of/not keeping the build
-//                if (keepBuild) {
-//                    ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
-//                } else {
-//                    ctx.info("Deleting build ${build}")
-//                }
         }
     }
 
