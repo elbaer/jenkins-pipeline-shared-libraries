@@ -43,11 +43,17 @@ class CleanBuildsCommand {
     }
 
     void printThis(String argument) {
-        println(argument)
+        info(argument)
     }
 
     @NonCPS
     getSuccessfulJobRuns(String jobname) {
         return Jenkins.instance.getItemByFullName(jobname).getBuilds().findAll { it.isKeepLog() }
+    }
+
+    void info(String message) {
+        script.ansiColor('xterm') {
+            script.echo("\033[0;34m${message}\033[0m")
+        }
     }
 }
