@@ -31,7 +31,8 @@ class CleanBuildsCommand {
                         keepBuild << it
                     }
                 }
-                //ctx.info("Keeping build because of the following promotions:")
+                keepBuild = checkBuild(keepBuild, build)
+
                 // print out reason of/not keeping the build
 //                if (keepBuild) {
 //                    ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
@@ -52,7 +53,13 @@ class CleanBuildsCommand {
     }
 
     @NonCPS
-    void deleteBuild(Object build) {
-        build.delete()
+    List checkBuild(keepBuild, build) {
+        // print out reason of/not keeping the build
+        if (keepBuild) {
+            ctx.info("Keeping build ${build} because of the following promotions: ${keepBuild.join(' ')}")
+        } else {
+            ctx.info("Deleting build ${build}")
+            build.delete()
+        }
     }
 }
