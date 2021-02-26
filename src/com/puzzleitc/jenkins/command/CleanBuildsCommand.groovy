@@ -41,7 +41,7 @@ class CleanBuildsCommand {
         }
     }
 
-    printThis(String argument) {
+    void printThis(String argument) {
         println(argument)
     }
 
