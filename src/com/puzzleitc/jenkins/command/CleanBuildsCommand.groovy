@@ -37,10 +37,10 @@ class CleanBuildsCommand {
             if (keepBuild) {
                 keepBuild.join(' ')
                 println("Keeping build ${build} because of the following promotions: ${keepBuild}")
-                log = log + "<br>" + "Keeping build ${build} because of the following promotions: ${keepBuild}"
+                log = log + "\n" + "Keeping build ${build} because of the following promotions: ${keepBuild}"
             } else {
                 println("Deleting build ${build}")
-                log = log + "<br>" + "Deleting build ${build}"
+                log = log + "\n" + "Deleting build ${build}"
                 build.delete()
             }
         }
