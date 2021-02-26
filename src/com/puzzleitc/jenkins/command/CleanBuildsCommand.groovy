@@ -15,10 +15,10 @@ class CleanBuildsCommand {
         def environmentBuildCount = [:]
         def job = ctx.stepParams.getRequired("job")
         Jenkins.instance.getItemByFullName(job).getBuilds().findAll { it.isKeepLog() }.each { build ->
-                ctx.info("Keeping build ${build}")
+
+            ctx.info("Keeping build ${build}")
         }
     }
-}
 
 //  void execute() {
 //   def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 10) as Integer
