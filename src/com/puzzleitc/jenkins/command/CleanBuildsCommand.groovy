@@ -44,6 +44,6 @@ class CleanBuildsCommand {
                 build.delete()
             }
         }
-        //ctx.info(log)
+        ctx.info(log)
     }
 }
