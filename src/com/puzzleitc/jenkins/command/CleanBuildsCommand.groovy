@@ -10,7 +10,8 @@ class CleanBuildsCommand {
     CleanBuildsCommand(PipelineContext ctx) {
         this.ctx = ctx
     }
-
+    
+    @NonCPS
     void execute() {
         ctx.info('-- CleanBuilds --')
         def maxNumberToKeepBuilds = ctx.stepParams.getOptional('maxKeepBuilds', 9)
